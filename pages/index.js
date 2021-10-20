@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -20,7 +20,7 @@ export default function Home() {
             <form>
               <div className="w-full px-3">
                 <input
-                  className="mb-3 block appearance-none bg-white placeholder-gray-500 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-200"
+                  className="mb-3 block appearance-none bg-white placeholder-gray-400 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-300 focus:ring-2 focus:ring-indigo-200"
                   placeholder="Enter Tweet URL"
                 />
 
@@ -29,7 +29,7 @@ export default function Home() {
                   type="button"
                   onClick={() => {
                     // TODO: handle submit
-                    console.log("submit");
+                    console.log(props);
                   }}
                 >
                   Submit
@@ -41,4 +41,20 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const id = "1450753872901783555";
+  const res = await fetch(
+    `https://api.twitter.com/2/tweets/${id}/retweeted_by`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `${process.env.BEARER_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await res.json();
+  return { props: { data } };
 }
