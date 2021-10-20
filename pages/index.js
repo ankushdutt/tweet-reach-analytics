@@ -1,8 +1,10 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [input, setInput] = useState("");
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -31,8 +33,7 @@ export default function Home() {
                 className="font-bold bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-500 hover:to-blue-600 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded"
                 type="button"
                 onClick={() => {
-                  // TODO: redirect using Next/Link for no page reloading
-                  window.location.href = `/analyze/${input}`;
+                  router.push(`/analyze/${input}`);
                 }}
               >
                 Submit

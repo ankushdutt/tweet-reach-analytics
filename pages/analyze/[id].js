@@ -1,7 +1,11 @@
 export default function Home({ data }) {
   return (
     <div>
-      <div>{console.log(data)}</div>
+      <div>
+        {data.data.forEach((element) => {
+          console.log(element.name);
+        })}
+      </div>
     </div>
   );
 }
