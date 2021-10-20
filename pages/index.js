@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { useState } from "react";
 
-export default function Home(props) {
+export default function Home() {
+  const [input, setInput] = useState("");
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -20,15 +22,17 @@ export default function Home(props) {
             <div className="w-full px-3">
               <input
                 className="mb-3 block appearance-none bg-white placeholder-gray-400 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-300 focus:ring-2 focus:ring-indigo-200"
-                placeholder="Enter Tweet URL"
+                placeholder="Enter Tweet ID"
+                value={input}
+                onInput={(e) => setInput(e.target.value)}
               />
 
               <button
                 className="font-bold bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-500 hover:to-blue-600 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded"
                 type="button"
                 onClick={() => {
-                  // TODO: redirect to /analyze/:tweetId
-                  console.log(props);
+                  // TODO: redirect using Next/Link for no page reloading
+                  window.location.href = `/analyze/${input}`;
                 }}
               >
                 Submit
