@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 function Analyze({ retweeted_by }) {
+  const [data, setData] = useState(retweeted_by);
   return (
     <div>
       <>
-        {retweeted_by.data.map(function (d, idx) {
+        {data.map(function (d, idx) {
           return (
             <li key={idx}>
               {d.id} {d.name}
@@ -25,7 +28,8 @@ export async function getServerSideProps({ params }) {
       },
     }
   );
-  const retweeted_by = await res.json();
+  const obj = await res.json();
+  const retweeted_by = obj.data;
   return { props: { retweeted_by } };
 }
 
