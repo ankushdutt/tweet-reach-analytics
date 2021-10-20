@@ -15,46 +15,28 @@ export default function Home(props) {
         <p className="mt-3 text-xl font-mono text-gray-600">
           Analyze and visualize the reach of a tweet
         </p>
-        <div className="mt-6 text-2xl">
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <form>
-              <div className="w-full px-3">
-                <input
-                  className="mb-3 block appearance-none bg-white placeholder-gray-400 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-300 focus:ring-2 focus:ring-indigo-200"
-                  placeholder="Enter Tweet URL"
-                />
+        <div className="mt-6 text-2xl flex flex-wrap -mx-3 mb-6">
+          <form>
+            <div className="w-full px-3">
+              <input
+                className="mb-3 block appearance-none bg-white placeholder-gray-400 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-300 focus:ring-2 focus:ring-indigo-200"
+                placeholder="Enter Tweet URL"
+              />
 
-                <button
-                  className="font-bold bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-500 hover:to-blue-600 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded"
-                  type="button"
-                  onClick={() => {
-                    // TODO: handle submit
-                    console.log(props);
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+              <button
+                className="font-bold bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-500 hover:to-blue-600 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded"
+                type="button"
+                onClick={() => {
+                  // TODO: redirect to /analyze/:tweetId
+                  console.log(props);
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </main>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const id = "1450753872901783555";
-  const res = await fetch(
-    `https://api.twitter.com/2/tweets/${id}/retweeted_by`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `${process.env.BEARER_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const data = await res.json();
-  return { props: { data } };
 }
