@@ -1,11 +1,15 @@
-export default function Home({ data }) {
+function Analyze({ retweeted_by }) {
   return (
     <div>
-      <div>
-        {data.data.forEach((element) => {
-          console.log(element.name);
+      <>
+        {retweeted_by.data.map(function (d, idx) {
+          return (
+            <li key={idx}>
+              {d.id} {d.name}
+            </li>
+          );
         })}
-      </div>
+      </>
     </div>
   );
 }
@@ -21,6 +25,8 @@ export async function getServerSideProps({ params }) {
       },
     }
   );
-  const data = await res.json();
-  return { props: { data } };
+  const retweeted_by = await res.json();
+  return { props: { retweeted_by } };
 }
+
+export default Analyze;
