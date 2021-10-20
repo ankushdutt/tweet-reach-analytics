@@ -12,10 +12,10 @@ export default function Home() {
         <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-blue-700">
           Tweet Reach Analytics
         </h1>
-        <p className="mt-3 text-xl text-gray-600">
+        <p className="mt-3 text-xl font-mono text-gray-600">
           Analyze and visualize the reach of a tweet
         </p>
-        <p className="mt-6 text-2xl">
+        <div className="mt-6 text-2xl">
           <div className="flex flex-wrap -mx-3 mb-6">
             <form>
               <div className="w-full px-3">
@@ -37,7 +37,7 @@ export default function Home() {
               </div>
             </form>
           </div>
-        </p>
+        </div>
       </main>
     </div>
   );
