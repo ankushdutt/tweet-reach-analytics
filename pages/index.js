@@ -23,13 +23,15 @@ export default function Home() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/analyze/${input}`);
+              const tweetID = getTweetID(input);
+              console.log(tweetID);
+              router.push(`/analyze/${tweetID}`);
             }}
           >
             <div className="w-full px-3">
               <input
                 className="mb-3 block appearance-none bg-white placeholder-gray-400 border border-indigo-200 rounded w-full py-3 px-4 text-gray-700 leading-5 focus:outline-none focus:border-indigo-400 focus:placeholder-gray-300 focus:ring-2 focus:ring-indigo-200"
-                placeholder="Enter Tweet ID"
+                placeholder="Enter Tweet URL"
                 value={input}
                 onInput={(e) => setInput(e.target.value)}
               />
@@ -47,3 +49,8 @@ export default function Home() {
     </div>
   );
 }
+
+const getTweetID = (tweetURL) => {
+  const tweetID = tweetURL.split("/").pop().split("?").shift();
+  return tweetID;
+};
